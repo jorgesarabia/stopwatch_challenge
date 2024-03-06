@@ -15,7 +15,7 @@ class _Buttons extends StatelessWidget {
               if (!stopwatchController.isStopped)
                 AppButton.lap(
                   isEnabled: stopwatchController.isRuning,
-                  onTap: () {},
+                  onTap: () => stopwatchController.getLap(),
                 ),
               if (stopwatchController.isZero) AppButton.start(onTap: () => stopwatchController.start()),
               if (stopwatchController.isRuning) AppButton.stop(onTap: () => stopwatchController.stop()),

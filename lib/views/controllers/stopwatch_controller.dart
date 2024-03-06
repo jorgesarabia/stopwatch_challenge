@@ -8,14 +8,14 @@ enum StopwatchState { zero, isRunning, isStopped }
 
 @injectable
 class StopwatchController extends ChangeNotifier {
-  StopwatchController(this._stopwatchModel) {
+  StopwatchController(this.stopwatchModel) {
     _timer = Timer.periodic(const Duration(milliseconds: 1), _onTimerTick);
     _stopwatch = Stopwatch();
   }
 
   late final Timer _timer;
   late final Stopwatch _stopwatch;
-  final StopwatchModel _stopwatchModel;
+  StopwatchModel stopwatchModel;
 
   final _timerController = StreamController<int>();
   Stream<int> get timerStream => _timerController.stream;
@@ -49,6 +49,24 @@ class StopwatchController extends ChangeNotifier {
   void reset() {
     _stopwatch.reset();
     _timerController.add(0);
+    notifyListeners();
+  }
+
+  void getLap() {
+    final milliseconds = _stopwatch.elapsedMilliseconds;
+    final currentMainTimer = stopwatchModel.mainTimer;
+    final partialMilliseconds = milliseconds - currentMainTimer.partialMilliseconds;
+    final newMainTimer = currentMainTimer.copyWith(
+      totalMilliseconds: milliseconds,
+      partialMilliseconds: partialMilliseconds,
+    );
+    final laps = stopwatchModel.laps.toList();
+    laps.add(newMainTimer);
+
+    stopwatchModel = stopwatchModel.copyWith(
+      mainTimer: newMainTimer,
+      laps: laps,
+    );
     notifyListeners();
   }
 
