@@ -15,6 +15,9 @@ class StopwatchController extends ChangeNotifier {
   late final Stopwatch _stopwatch;
   StopwatchModel stopwatchModel;
 
+  int bestLap = -1;
+  int worstLap = -1;
+
   final _timerController = StreamController<int>();
   Stream<int> get timerStream => _timerController.stream;
 
@@ -42,6 +45,8 @@ class StopwatchController extends ChangeNotifier {
     _stopwatch.reset();
     _timerController.add(0);
     stopwatchModel = StopwatchModel.empty();
+    bestLap = -1;
+    worstLap = -1;
     notifyListeners();
   }
 
@@ -55,6 +60,9 @@ class StopwatchController extends ChangeNotifier {
     );
     final laps = stopwatchModel.laps.toList();
     laps.add(newMainTimer);
+
+    if (partialMilliseconds < bestLap || bestLap == -1) bestLap = partialMilliseconds;
+    if (partialMilliseconds > worstLap) worstLap = partialMilliseconds;
 
     stopwatchModel = stopwatchModel.copyWith(
       mainTimer: newMainTimer,
