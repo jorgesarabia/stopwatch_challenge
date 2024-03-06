@@ -7,30 +7,34 @@ class _Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<StopwatchController>(
       builder: (context, stopwatchController, child) {
-        return Row(
-          children: [
-            if (!stopwatchController.isStopped)
-              AppButton.lap(
-                isEnabled: stopwatchController.isRuning,
-                onTap: () {},
-              ),
-            if (stopwatchController.isZero)
-              AppButton.start(onTap: () {
-                stopwatchController.start();
-              }),
-            if (stopwatchController.isRuning)
-              AppButton.stop(onTap: () {
-                stopwatchController.stop();
-              }),
-            if (stopwatchController.isStopped) ...[
-              AppButton.reset(onTap: () {
-                stopwatchController.reset();
-              }),
-              AppButton.resume(onTap: () {
-                stopwatchController.start();
-              }),
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 25.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              if (!stopwatchController.isStopped)
+                AppButton.lap(
+                  isEnabled: stopwatchController.isRuning,
+                  onTap: () {},
+                ),
+              if (stopwatchController.isZero)
+                AppButton.start(onTap: () {
+                  stopwatchController.start();
+                }),
+              if (stopwatchController.isRuning)
+                AppButton.stop(onTap: () {
+                  stopwatchController.stop();
+                }),
+              if (stopwatchController.isStopped) ...[
+                AppButton.reset(onTap: () {
+                  stopwatchController.reset();
+                }),
+                AppButton.resume(onTap: () {
+                  stopwatchController.start();
+                }),
+              ],
             ],
-          ],
+          ),
         );
       },
     );

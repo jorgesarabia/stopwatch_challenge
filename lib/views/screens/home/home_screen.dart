@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:stopwatch_challenge/utils/injectable/injectable.dart';
 import 'package:stopwatch_challenge/views/controllers/stopwatch_controller.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatelessWidget {
           body: Column(
             children: [
               _MainTimer(),
+              Spacer(),
               _Buttons(),
             ],
           ),

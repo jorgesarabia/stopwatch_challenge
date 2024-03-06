@@ -5,20 +5,33 @@ class _MainTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<int>(
-      create: (context) => context.read<StopwatchController>().timerStream,
-      initialData: 0,
-      child: Consumer<int>(
-        builder: (context, milliseconds, child) {
-          int seconds = milliseconds ~/ 1000;
-          int minutes = seconds ~/ 60;
-          seconds %= 60;
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: StreamProvider<int>(
+        create: (context) => context.read<StopwatchController>().timerStream,
+        initialData: 0,
+        child: Consumer<int>(
+          builder: (context, milliseconds, child) {
+            final seconds = (milliseconds / 1000).truncate();
+            final minutes = (seconds / 60).truncate();
+            final remainingSeconds = seconds % 60;
+            final remainingMilliseconds = ((milliseconds % 1000) / 10).truncate();
 
-          String formattedTime =
-              '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}.${(milliseconds ~/ 10).toString().padLeft(2, '0')}';
+            final buffer = StringBuffer(minutes.toString().padLeft(2, '0'));
+            buffer.write(':');
+            buffer.write(remainingSeconds.toString().padLeft(2, '0'));
+            buffer.write('.');
+            buffer.write(remainingMilliseconds.toString().padLeft(2, '0'));
 
-          return Text(formattedTime);
-        },
+            return Text(
+              buffer.toString(),
+              style: TextStyle(
+                fontSize: 35.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+          },
+        ),
       ),
     );
   }
