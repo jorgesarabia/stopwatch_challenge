@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stopwatch_challenge/models/stopwatch_model.dart';
 
-enum StopwatchState { zero, isRunning, isStopped }
-
 @injectable
 class StopwatchController extends ChangeNotifier {
   StopwatchController(this.stopwatchModel) {
@@ -20,15 +18,9 @@ class StopwatchController extends ChangeNotifier {
   final _timerController = StreamController<int>();
   Stream<int> get timerStream => _timerController.stream;
 
-  StopwatchState get stopwatchState {
-    if (_stopwatch.isRunning) return StopwatchState.isRunning;
-    if (_stopwatch.elapsedMicroseconds == 0) return StopwatchState.zero;
-    return StopwatchState.isStopped;
-  }
-
-  bool get isZero => stopwatchState == StopwatchState.zero;
-  bool get isRuning => stopwatchState == StopwatchState.isRunning;
-  bool get isStopped => stopwatchState == StopwatchState.isStopped;
+  bool get isZero => _stopwatch.elapsedMicroseconds == 0;
+  bool get isRuning => _stopwatch.isRunning;
+  bool get isStopped => !isZero && !isRuning;
 
   void _onTimerTick(Timer timer) {
     if (_stopwatch.isRunning) {
