@@ -6,9 +6,9 @@ import 'package:stopwatch_challenge/views/screens/app_landing/app_landing_screen
 import 'utils/injectable/injectable.dart';
 import 'views/controllers/stopwatch_controller.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection();
+  await configureInjection();
   runApp(const Stopwatch());
 }
 

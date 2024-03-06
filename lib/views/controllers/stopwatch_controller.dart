@@ -2,17 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
+import 'package:stopwatch_challenge/data/stopwatch_service.dart';
 import 'package:stopwatch_challenge/models/stopwatch_model.dart';
+
+import '../../models/saved_stopwatch.dart';
 
 @injectable
 class StopwatchController extends ChangeNotifier {
-  StopwatchController(this.stopwatchModel) {
+  StopwatchController(this.stopwatchModel, this._stopwatchService) {
     _timer = Timer.periodic(const Duration(milliseconds: 2), _onTimerTick);
     _stopwatch = Stopwatch();
   }
 
   late final Timer _timer;
   late final Stopwatch _stopwatch;
+
+  final StopwatchService _stopwatchService;
   StopwatchModel stopwatchModel;
 
   int bestLap = -1;
@@ -42,6 +47,7 @@ class StopwatchController extends ChangeNotifier {
   }
 
   void reset() {
+    _stopwatchService.saveStopwatch(stopwatchModel: stopwatchModel, bestLap: bestLap, worstLap: worstLap);
     _stopwatch.reset();
     _timerController.add(0);
     stopwatchModel = StopwatchModel.empty();
@@ -49,6 +55,8 @@ class StopwatchController extends ChangeNotifier {
     worstLap = -1;
     notifyListeners();
   }
+
+  Future<List<SavedStopwatch>> getSavedStopwatches() => _stopwatchService.getSavedStopwatches();
 
   void getLap() {
     final milliseconds = _stopwatch.elapsedMilliseconds;
