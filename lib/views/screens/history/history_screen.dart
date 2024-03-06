@@ -28,7 +28,12 @@ class HistoryScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: dataList.length,
             itemBuilder: (context, index) {
-              return _HistoryCard(savedStopwatch: dataList[index]);
+              final savedStopwatch = dataList[index];
+
+              return GestureDetector(
+                onTap: () => context.read<StopwatchController>().loadSavedStopwatch(savedStopwatch),
+                child: _HistoryCard(savedStopwatch: savedStopwatch),
+              );
             },
           );
         }

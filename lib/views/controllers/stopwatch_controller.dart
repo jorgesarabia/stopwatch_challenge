@@ -16,12 +16,16 @@ class StopwatchController extends ChangeNotifier {
 
   late final Timer _timer;
   late final Stopwatch _stopwatch;
+  int _initialMilliseconds = 0;
+  int _totalMilliseconds = 0;
 
   final StopwatchService _stopwatchService;
   StopwatchModel stopwatchModel;
 
   int bestLap = -1;
   int worstLap = -1;
+
+  int tab = 0;
 
   final _timerController = StreamController<int>();
   Stream<int> get timerStream => _timerController.stream;
@@ -32,8 +36,14 @@ class StopwatchController extends ChangeNotifier {
 
   void _onTimerTick(Timer timer) {
     if (_stopwatch.isRunning) {
-      _timerController.add(_stopwatch.elapsedMilliseconds);
+      _totalMilliseconds = _initialMilliseconds + _stopwatch.elapsedMilliseconds;
+      _timerController.add(_totalMilliseconds);
     }
+  }
+
+  void updateTab(int newTab) {
+    tab = newTab;
+    notifyListeners();
   }
 
   void start() {
@@ -53,13 +63,25 @@ class StopwatchController extends ChangeNotifier {
     stopwatchModel = StopwatchModel.empty();
     bestLap = -1;
     worstLap = -1;
+    _totalMilliseconds = 0;
+    _initialMilliseconds = 0;
     notifyListeners();
   }
 
   Future<List<SavedStopwatch>> getSavedStopwatches() => _stopwatchService.getSavedStopwatches();
 
+  void loadSavedStopwatch(SavedStopwatch savedStopwatch) {
+    stopwatchModel = savedStopwatch.stopwatchModel;
+    bestLap = savedStopwatch.bestLap;
+    worstLap = savedStopwatch.worstLap;
+    tab = 0;
+    _initialMilliseconds = stopwatchModel.mainTimer.totalMilliseconds;
+    _timerController.add(_initialMilliseconds);
+    notifyListeners();
+  }
+
   void getLap() {
-    final milliseconds = _stopwatch.elapsedMilliseconds;
+    final milliseconds = _totalMilliseconds;
     final currentMainTimer = stopwatchModel.mainTimer;
     final partialMilliseconds = milliseconds - currentMainTimer.totalMilliseconds;
     final newMainTimer = currentMainTimer.copyWith(
