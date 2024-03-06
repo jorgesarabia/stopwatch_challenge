@@ -49,13 +49,14 @@ class StopwatchController extends ChangeNotifier {
   void reset() {
     _stopwatch.reset();
     _timerController.add(0);
+    stopwatchModel = StopwatchModel.empty();
     notifyListeners();
   }
 
   void getLap() {
     final milliseconds = _stopwatch.elapsedMilliseconds;
     final currentMainTimer = stopwatchModel.mainTimer;
-    final partialMilliseconds = milliseconds - currentMainTimer.partialMilliseconds;
+    final partialMilliseconds = milliseconds - currentMainTimer.totalMilliseconds;
     final newMainTimer = currentMainTimer.copyWith(
       totalMilliseconds: milliseconds,
       partialMilliseconds: partialMilliseconds,

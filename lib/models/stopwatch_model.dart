@@ -11,5 +11,7 @@ class StopwatchModel with _$StopwatchModel {
     @Default([]) List<TimerModel> laps,
   }) = _StopwatchModel;
 
+  factory StopwatchModel.empty() => StopwatchModel();
+
   factory StopwatchModel.fromJson(Map<String, dynamic> json) => _$StopwatchModelFromJson(json);
 }
