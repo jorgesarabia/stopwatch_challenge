@@ -35,11 +35,21 @@ class _Laps extends StatelessWidget {
                       laps.length,
                       (index) {
                         final lap = laps[index];
-                        return TableRow(children: [
-                          Text((index + 1).toString().padLeft(2, '0'), textAlign: TextAlign.center),
-                          Text(lap.partialMilliseconds.toStopwatchStyle, textAlign: TextAlign.center),
-                          Text(lap.totalMilliseconds.toStopwatchStyle, textAlign: TextAlign.center),
-                        ]);
+
+                        return TableRow(
+                          decoration: BoxDecoration(
+                            color: getColor(
+                              stopwatchController: stopwatchController,
+                              lap: lap.partialMilliseconds,
+                              isEnabled: laps.length > 2,
+                            ),
+                          ),
+                          children: [
+                            Text((index + 1).toString().padLeft(2, '0'), textAlign: TextAlign.center),
+                            Text(lap.partialMilliseconds.toStopwatchStyle, textAlign: TextAlign.center),
+                            Text(lap.totalMilliseconds.toStopwatchStyle, textAlign: TextAlign.center),
+                          ],
+                        );
                       },
                     ),
                   ),
@@ -50,5 +60,17 @@ class _Laps extends StatelessWidget {
         );
       },
     );
+  }
+
+  Color? getColor({required StopwatchController stopwatchController, required int lap, required bool isEnabled}) {
+    if (isEnabled) {
+      final bestLap = stopwatchController.bestLap;
+      final worstLap = stopwatchController.worstLap;
+
+      if (lap == bestLap) return Colors.green;
+      if (lap == worstLap) return Colors.red;
+    }
+
+    return null;
   }
 }
