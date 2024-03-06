@@ -17,21 +17,11 @@ class _Buttons extends StatelessWidget {
                   isEnabled: stopwatchController.isRuning,
                   onTap: () {},
                 ),
-              if (stopwatchController.isZero)
-                AppButton.start(onTap: () {
-                  stopwatchController.start();
-                }),
-              if (stopwatchController.isRuning)
-                AppButton.stop(onTap: () {
-                  stopwatchController.stop();
-                }),
+              if (stopwatchController.isZero) AppButton.start(onTap: () => stopwatchController.start()),
+              if (stopwatchController.isRuning) AppButton.stop(onTap: () => stopwatchController.stop()),
               if (stopwatchController.isStopped) ...[
-                AppButton.reset(onTap: () {
-                  stopwatchController.reset();
-                }),
-                AppButton.resume(onTap: () {
-                  stopwatchController.start();
-                }),
+                AppButton.reset(onTap: () => stopwatchController.reset()),
+                AppButton.resume(onTap: () => stopwatchController.start()),
               ],
             ],
           ),
