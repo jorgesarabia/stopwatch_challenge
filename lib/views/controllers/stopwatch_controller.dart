@@ -7,7 +7,7 @@ import 'package:stopwatch_challenge/models/stopwatch_model.dart';
 @injectable
 class StopwatchController extends ChangeNotifier {
   StopwatchController(this.stopwatchModel) {
-    _timer = Timer.periodic(const Duration(milliseconds: 1), _onTimerTick);
+    _timer = Timer.periodic(const Duration(milliseconds: 2), _onTimerTick);
     _stopwatch = Stopwatch();
   }
 

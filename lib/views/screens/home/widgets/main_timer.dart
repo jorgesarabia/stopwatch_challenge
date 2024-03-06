@@ -12,12 +12,22 @@ class _MainTimer extends StatelessWidget {
         initialData: 0,
         child: Consumer<int>(
           builder: (context, milliseconds, child) {
-            return Text(
-              milliseconds.toStopwatchStyle,
-              style: TextStyle(
-                fontSize: 35.sp,
-                fontWeight: FontWeight.w600,
-              ),
+            final stopwatchController = context.read<StopwatchController>();
+
+            return Column(
+              children: [
+                Text(
+                  milliseconds.toStopwatchStyle,
+                  style: TextStyle(
+                    fontSize: 35.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                if (stopwatchController.stopwatchModel.laps.isNotEmpty)
+                  Text(
+                    (milliseconds - stopwatchController.stopwatchModel.mainTimer.totalMilliseconds).toStopwatchStyle,
+                  ),
+              ],
             );
           },
         ),
