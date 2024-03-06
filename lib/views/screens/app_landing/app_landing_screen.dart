@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stopwatch_challenge/views/screens/history/history_screen.dart';
 import 'package:stopwatch_challenge/views/screens/home/home_screen.dart';
 
 part 'widgets/icon_button.dart';
@@ -16,7 +17,7 @@ class _AppLandingScreenState extends State<AppLandingScreen> {
 
   static const List<Widget> _tabSections = <Widget>[
     HomeScreen(),
-    HomeScreen(),
+    HistoryScreen(),
   ];
 
   void _updateSelectedIndex(int index) => setState(() => _selectedIndex = index);

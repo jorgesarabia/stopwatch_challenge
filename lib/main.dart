@@ -17,8 +17,13 @@ class Stopwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => getIt.get<StopwatchController>(),
+    final stopwatchController = getIt.get<StopwatchController>();
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => stopwatchController),
+        StreamProvider<int>(create: (_) => stopwatchController.timerStream, initialData: 0),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
