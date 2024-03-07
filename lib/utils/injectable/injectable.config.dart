@@ -33,12 +33,14 @@ extension GetItInjectableX on _i1.GetIt {
       () => modules.prefs,
       preResolve: true,
     );
+    gh.factory<Stopwatch>(() => modules.stopwatch);
     gh.factory<_i4.StopwatchModel>(() => modules.stopwatchModel);
     gh.factory<_i5.StopwatchService>(
         () => _i5.StopwatchService(gh<_i3.SharedPreferences>()));
     gh.factory<_i6.StopwatchController>(() => _i6.StopwatchController(
           gh<_i4.StopwatchModel>(),
           gh<_i5.StopwatchService>(),
+          gh<Stopwatch>(),
         ));
     return this;
   }
