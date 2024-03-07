@@ -56,8 +56,8 @@ class StopwatchController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void reset() {
-    _stopwatchService.saveStopwatch(stopwatchModel: stopwatchModel, bestLap: bestLap, worstLap: worstLap);
+  void reset() async {
+    await _stopwatchService.saveStopwatch(stopwatchModel: stopwatchModel, bestLap: bestLap, worstLap: worstLap);
     _stopwatch.reset();
     _timerController.add(0);
     stopwatchModel = StopwatchModel.empty();
@@ -69,10 +69,7 @@ class StopwatchController extends ChangeNotifier {
   }
 
   Future<List<SavedStopwatch>> getSavedStopwatches() => _stopwatchService.getSavedStopwatches();
-  Future<void> deleteHistory() async {
-    await _stopwatchService.deleteSavedStopwatches();
-    notifyListeners();
-  }
+  Future<void> deleteHistory() async => await _stopwatchService.deleteSavedStopwatches();
 
   void loadSavedStopwatch(SavedStopwatch savedStopwatch) {
     stopwatchModel = savedStopwatch.stopwatchModel;
