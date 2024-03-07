@@ -121,7 +121,7 @@ class __$$StopwatchModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StopwatchModelImpl implements _StopwatchModel {
-  _$StopwatchModelImpl(
+  const _$StopwatchModelImpl(
       {this.mainTimer = const TimerModel(),
       final List<TimerModel> laps = const []})
       : _laps = laps;
@@ -177,7 +177,7 @@ class _$StopwatchModelImpl implements _StopwatchModel {
 }
 
 abstract class _StopwatchModel implements StopwatchModel {
-  factory _StopwatchModel(
+  const factory _StopwatchModel(
       {final TimerModel mainTimer,
       final List<TimerModel> laps}) = _$StopwatchModelImpl;
 
