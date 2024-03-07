@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:clock/clock.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,7 +15,11 @@ void main() {
 
   setUp(() {
     mockStopwatchService = MockStopwatchService();
-    stopwatchController = StopwatchController(StopwatchModel.empty(), mockStopwatchService);
+    stopwatchController = StopwatchController(
+      StopwatchModel.empty(),
+      mockStopwatchService,
+      clock.stopwatch(),
+    );
   });
 
   tearDown(() {
@@ -116,50 +119,70 @@ void main() {
     expect(stopwatchController.tab, 0);
   });
 
-  // test('getLap should work correctly', () async {
-  //   final fakeAsync = FakeAsync();
-  //   fakeAsync.run((asyncFake) {
-  //     StopwatchController localStopwatchController = StopwatchController(StopwatchModel.empty(), mockStopwatchService);
+  test('getLap should work correctly', () async {
+    final fakeAsync = FakeAsync();
+    fakeAsync.run((asyncFake) {
+      StopwatchController localStopwatchController = StopwatchController(
+        StopwatchModel.empty(),
+        mockStopwatchService,
+        clock.stopwatch(),
+      );
 
-  //     localStopwatchController.updateTab(5);
-  //     expect(localStopwatchController.stopwatchModel, StopwatchModel.empty());
-  //     expect(localStopwatchController.bestLap, -1);
-  //     expect(localStopwatchController.worstLap, -1);
-  //     expect(localStopwatchController.tab, 5);
+      localStopwatchController.updateTab(5);
+      expect(localStopwatchController.stopwatchModel, StopwatchModel.empty());
+      expect(localStopwatchController.bestLap, -1);
+      expect(localStopwatchController.worstLap, -1);
+      expect(localStopwatchController.tab, 5);
 
-  //     const timer = TimerModel(totalMilliseconds: 10, partialMilliseconds: 10);
-  //     const stopwatchModel = StopwatchModel(
-  //       mainTimer: timer,
-  //       laps: [timer],
-  //     );
+      const timer = TimerModel(totalMilliseconds: 10, partialMilliseconds: 10);
+      const stopwatchModel = StopwatchModel(
+        mainTimer: timer,
+        laps: [timer],
+      );
 
-  //     final mockSavedStopwatch = SavedStopwatch(
-  //       stopwatchModel: stopwatchModel,
-  //       bestLap: 100,
-  //       worstLap: 1000,
-  //     );
+      final mockSavedStopwatch = SavedStopwatch(
+        stopwatchModel: stopwatchModel,
+        bestLap: 100,
+        worstLap: 1000,
+      );
 
-  //     localStopwatchController.loadSavedStopwatch(mockSavedStopwatch);
-  //     expect(localStopwatchController.stopwatchModel, stopwatchModel);
-  //     expect(localStopwatchController.bestLap, 100);
-  //     expect(localStopwatchController.worstLap, 1000);
-  //     expect(localStopwatchController.tab, 0);
+      localStopwatchController.loadSavedStopwatch(mockSavedStopwatch);
+      expect(localStopwatchController.stopwatchModel, stopwatchModel);
+      expect(localStopwatchController.bestLap, 100);
+      expect(localStopwatchController.worstLap, 1000);
+      expect(localStopwatchController.tab, 0);
 
-  //     localStopwatchController.start();
+      localStopwatchController.start();
 
-  //     asyncFake.elapse(const Duration(milliseconds: 200));
+      asyncFake.elapse(const Duration(milliseconds: 10));
 
-  //     localStopwatchController.getLap();
-  //     // expect(
-  //     //   localStopwatchController.stopwatchModel,
-  //     //   stopwatchModel.copyWith(
-  //     //     mainTimer: stopwatchModel.mainTimer.copyWith(totalMilliseconds: 20),
-  //     //     laps: [stopwatchModel.laps.first, const TimerModel(totalMilliseconds: 20, partialMilliseconds: 10)],
-  //     //   ),
-  //     // );
-  //     expect(localStopwatchController.bestLap, 10);
-  //     // expect(localStopwatchController.worstLap, 1000);
-  //     // expect(localStopwatchController.tab, 0);
-  //   });
-  // });
+      localStopwatchController.getLap();
+      expect(
+        localStopwatchController.stopwatchModel,
+        stopwatchModel.copyWith(
+          mainTimer: stopwatchModel.mainTimer.copyWith(totalMilliseconds: 20),
+          laps: [timer, timer.copyWith(totalMilliseconds: 20)],
+        ),
+      );
+      expect(localStopwatchController.bestLap, 10);
+      expect(localStopwatchController.worstLap, 1000);
+
+      asyncFake.elapse(const Duration(milliseconds: 2000));
+
+      localStopwatchController.getLap();
+      expect(
+        localStopwatchController.stopwatchModel,
+        stopwatchModel.copyWith(
+          mainTimer: stopwatchModel.mainTimer.copyWith(totalMilliseconds: 2020, partialMilliseconds: 2000),
+          laps: [
+            timer,
+            timer.copyWith(totalMilliseconds: 20),
+            timer.copyWith(totalMilliseconds: 2020, partialMilliseconds: 2000),
+          ],
+        ),
+      );
+      expect(localStopwatchController.bestLap, 10);
+      expect(localStopwatchController.worstLap, 2000);
+    });
+  });
 }

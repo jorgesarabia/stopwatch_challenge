@@ -8,4 +8,6 @@ abstract class Modules {
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 
   StopwatchModel get stopwatchModel => StopwatchModel.empty();
+
+  Stopwatch get stopwatch => Stopwatch();
 }

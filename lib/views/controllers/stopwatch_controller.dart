@@ -9,9 +9,8 @@ import '../../models/saved_stopwatch.dart';
 
 @injectable
 class StopwatchController extends ChangeNotifier {
-  StopwatchController(this.stopwatchModel, this._stopwatchService) {
+  StopwatchController(this.stopwatchModel, this._stopwatchService, this._stopwatch) {
     _timer = Timer.periodic(const Duration(milliseconds: 2), _onTimerTick);
-    _stopwatch = Stopwatch();
   }
 
   late final Timer _timer;
