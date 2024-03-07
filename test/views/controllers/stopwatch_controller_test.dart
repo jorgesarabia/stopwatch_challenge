@@ -185,4 +185,29 @@ void main() {
       expect(localStopwatchController.worstLap, 2000);
     });
   });
+
+  test('timerStream emit', () async {
+    int mockValue = 0;
+    stopwatchController.timerStream.listen((event) {
+      expect(event, mockValue);
+    });
+
+    mockValue = 10;
+    const timer = TimerModel(totalMilliseconds: 10);
+    const stopwatchModel = StopwatchModel(mainTimer: timer);
+    final mockSavedStopwatch = SavedStopwatch(stopwatchModel: stopwatchModel);
+
+    stopwatchController.loadSavedStopwatch(mockSavedStopwatch);
+
+    await Future.delayed(const Duration(milliseconds: 10));
+
+    mockValue = 120;
+    stopwatchController.loadSavedStopwatch(
+      mockSavedStopwatch.copyWith(
+        stopwatchModel: stopwatchModel.copyWith(
+          mainTimer: timer.copyWith(totalMilliseconds: mockValue),
+        ),
+      ),
+    );
+  });
 }
