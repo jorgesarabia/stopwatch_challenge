@@ -69,6 +69,10 @@ class StopwatchController extends ChangeNotifier {
   }
 
   Future<List<SavedStopwatch>> getSavedStopwatches() => _stopwatchService.getSavedStopwatches();
+  Future<void> deleteHistory() async {
+    await _stopwatchService.deleteSavedStopwatches();
+    notifyListeners();
+  }
 
   void loadSavedStopwatch(SavedStopwatch savedStopwatch) {
     stopwatchModel = savedStopwatch.stopwatchModel;
