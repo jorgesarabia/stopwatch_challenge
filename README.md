@@ -33,8 +33,7 @@ Pressing "Resume" will continue the stopwatch from where it was stopped. Pressin
 <img width="200" alt= "flutter_03" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/a9ab97a3-0dd5-4c1d-b385-822aaa122856">
 <img width="200" alt= "flutter_04" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/c09c137a-f569-4a15-972b-7698b933e5cf">
 <img width="200" alt= "flutter_05" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/3c3c8123-bc88-48b7-845a-c0367e351526">
-<img width="200" alt= "flutter_06" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/40afe2c5-5b50-4d4b-b646-11ac045e41ed">
-<img width="200" alt= "flutter_07" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/f1ed753b-8e9e-42b1-ba4f-72e6fd6d9874">
+<img width="200" alt= "flutter_06" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/f1ed753b-8e9e-42b1-ba4f-72e6fd6d9874">
 
 
 
