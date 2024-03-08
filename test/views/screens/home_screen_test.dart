@@ -7,6 +7,7 @@ import 'package:stopwatch_challenge/utils/extensions/time_formatter_extension.da
 import 'package:stopwatch_challenge/views/screens/home/home_screen.dart';
 
 import '../controllers/mock_stopwatch_controller.mocks.dart';
+
 import '../screen_util_wrapper.dart';
 
 void main() {
