@@ -35,33 +35,34 @@ class _AppLandingScreenState extends State<AppLandingScreen> {
   Widget build(BuildContext context) {
     return Consumer<StopwatchController>(
       builder: (context, stopwatchController, _) {
-        return SafeArea(
-          child: Scaffold(
-            body: _tabSections.elementAt(stopwatchController.tab),
-            bottomNavigationBar: BottomAppBar(
-              elevation: 2,
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 40.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    _IconButton(
-                      icon: Icons.timer,
-                      isSelected: stopwatchController.tab == 0,
-                      onPressed: () => stopwatchController.updateTab(0),
-                      label: 'Stopwatch',
-                    ),
-                    _IconButton(
-                      icon: Icons.history,
-                      isSelected: stopwatchController.tab == 1,
-                      onPressed: () => stopwatchController.updateTab(1),
-                      label: 'History',
-                    ),
-                  ],
+        return Scaffold(
+          body: Column(
+            children: [
+              Expanded(child: _tabSections.elementAt(stopwatchController.tab)),
+              Container(
+                color: Colors.grey.withOpacity(0.3),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 40.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _IconButton(
+                        icon: Icons.timer,
+                        isSelected: stopwatchController.tab == 0,
+                        onPressed: () => stopwatchController.updateTab(0),
+                        label: 'Stopwatch',
+                      ),
+                      _IconButton(
+                        icon: Icons.history,
+                        isSelected: stopwatchController.tab == 1,
+                        onPressed: () => stopwatchController.updateTab(1),
+                        label: 'History',
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         );
       },
