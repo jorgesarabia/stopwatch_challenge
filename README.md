@@ -1,16 +1,31 @@
-# stopwatch_challenge
+# Stopwatch
 
-A new Flutter project.
+## Description
 
-## Getting Started
+Stopwatch is an application for measuring time. It allows users to time events and record laps. 
+It highlights the best time and the worst time when more than two laps are recorded. Additionally, it saves a history of measurements in the device's storage.
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+To install the application, follow these steps:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the project from the repository.
+2. Run `flutter pub get` to fetch the dependencies.
+3. Run the application using `flutter run`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+
+Upon opening the application, the stopwatch will be at zero. The available buttons are "Start" to begin the stopwatch and "Lap" to record laps. Once the stopwatch is started, the "Start" button changes to "Stop" and the "Lap" button becomes active. Pressing "Lap" will record the current lap and display it in a table.
+
+When the stopwatch is stopped, the "Stop" button changes to "Resume" and the "Lap" button changes to "Reset". 
+Pressing "Resume" will continue the stopwatch from where it was stopped. Pressing "Reset" will reset the stopwatch and clear all recorded laps, while saving the history to the device's storage.
+
+## Main Features
+
+- Stopwatch for measuring time.
+- Highlights the best lap in green and the worst lap in red.
+- Saves a history of measurements in the device's storage.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
