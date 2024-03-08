@@ -27,6 +27,7 @@ Pressing "Resume" will continue the stopwatch from where it was stopped. Pressin
 - Saves a history of measurements in the device's storage.
 
 ## Screenshots
+
 <img width="200" alt= "flutter_00" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/7926ab96-9354-401a-ac2d-36130914cae1">
 <img width="200" alt= "flutter_01" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/03c289cc-e7bf-426e-b3d8-5b0e0efb04a5">
 <img width="200" alt= "flutter_02" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/2e90c715-3976-4638-b594-9fc04649fd4b">
@@ -35,12 +36,10 @@ Pressing "Resume" will continue the stopwatch from where it was stopped. Pressin
 <img width="200" alt= "flutter_05" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/3c3c8123-bc88-48b7-845a-c0367e351526">
 <img width="200" alt= "flutter_06" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/f1ed753b-8e9e-42b1-ba4f-72e6fd6d9874">
 
+## Testing
 
-
-
-
+![Screenshot 2024-03-08 at 15 38 22](https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/851e0232-197e-478f-8e7c-713e75c3a409)
 
 ## License
-
 
 This project is licensed under the [MIT License](LICENSE).
