@@ -8,17 +8,28 @@ import 'package:stopwatch_challenge/views/screens/home/home_screen.dart';
 part 'widgets/icon_button.dart';
 
 class AppLandingScreen extends StatefulWidget {
-  const AppLandingScreen({super.key});
+  const AppLandingScreen({
+    super.key,
+    this.tabs = const <Widget>[
+      HomeScreen(),
+      HistoryScreen(),
+    ],
+  });
+
+  final List<Widget> tabs;
 
   @override
   State<AppLandingScreen> createState() => _AppLandingScreenState();
 }
 
 class _AppLandingScreenState extends State<AppLandingScreen> {
-  static const List<Widget> _tabSections = <Widget>[
-    HomeScreen(),
-    HistoryScreen(),
-  ];
+  late final List<Widget> _tabSections;
+
+  @override
+  void initState() {
+    _tabSections = widget.tabs;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
