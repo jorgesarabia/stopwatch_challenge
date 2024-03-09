@@ -38,7 +38,7 @@ Pressing "Resume" will continue the stopwatch from where it was stopped. Pressin
 
 ## Testing
 
-<img width="200" alt= "tests" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/851e0232-197e-478f-8e7c-713e75c3a409">
+<img alt= "tests" src="https://github.com/jorgesarabia/stopwatch_challenge/assets/6399992/851e0232-197e-478f-8e7c-713e75c3a409">
 
 ## License
 
